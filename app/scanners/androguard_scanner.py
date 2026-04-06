@@ -7,16 +7,12 @@ from typing import Dict, Any, List
 
 logger = logging.getLogger(__name__)
 
-# ============================================================
-# IMPORTANT: Patch androguard TRƯỚC KHI IMPORT
-# ============================================================
-from app.patch_androguard import patch_androguard_before_import
+# IMPORTANT: Patch SDK trước khi import androguard
+import app.sdk_patch
 
-patch_androguard_before_import()
+app.sdk_patch.setup_android_sdk()
 
-# ============================================================
 # Now safe to import androguard
-# ============================================================
 from androguard.core.bytecodes import apk, dvm
 from androguard.core.analysis import analysis
 
@@ -49,7 +45,7 @@ class AndroguardScanner:
         }
 
         try:
-            # Load APK
+            print(f"Loading APK: {file_path}")
             a = apk.APK(file_path)
 
             # Basic app info
@@ -128,8 +124,8 @@ class AndroguardScanner:
                     try:
                         d = dvm.DalvikVMFormat(dex_files[0])
                         dex_code = str(d.get_classes())
-                    except:
-                        pass
+                    except Exception as e:
+                        logger.warning(f"Error parsing dex: {e}")
 
                 voice_phishing_results = self.voice_phishing_scanner.scan_apk(a, dex_code)
                 results["voice_phishing"] = voice_phishing_results
@@ -140,6 +136,8 @@ class AndroguardScanner:
             except Exception as e:
                 logger.error(f"Error in voice phishing analysis: {e}")
                 results["voice_phishing"] = {"error": str(e)}
+
+            print(f"Scan completed for {file_path}")
 
         except Exception as e:
             logger.error(f"Error in Androguard scan: {e}")
