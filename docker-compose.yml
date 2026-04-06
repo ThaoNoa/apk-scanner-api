@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app/app
+      - ./uploads:/app/uploads
+      - ./yara_rules:/app/app/yara_rules
+    environment:
+      - MOBSF_API_KEY=${MOBSF_API_KEY:-}
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - redis
+      - mobsf
+    networks:
+      - scanner-network
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - scanner-network
+
+  mobsf:
+    image: opensecurity/mobile-security-framework-mobsf:latest
+    ports:
+      - "8001:8000"
+    environment:
+      - MOBSF_API_KEY=${MOBSF_API_KEY:-12345}
+    volumes:
+      - mobsf-data:/home/mobsf/.MobSF
+    networks:
+      - scanner-network
+
+volumes:
+  mobsf-data:
+
+networks:
+  scanner-network:
+    driver: bridge

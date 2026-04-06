@@ -1,0 +1,30 @@
+{
+  "evaluation_report": {
+    "date": "2026-03-25T22:36:55.566815",
+    "test_duration_seconds": 0.16,
+    "dataset": {
+      "normal_apks": 100,
+      "malicious_apks": 100,
+      "total_files": 200,
+      "files_with_errors": 0
+    },
+    "confusion_matrix": {
+      "true_positives": 0,
+      "false_positives": 0,
+      "false_negatives": 100,
+      "true_negatives": 100
+    },
+    "metrics": {
+      "precision": 0,
+      "recall": 0.0,
+      "f1_score": 0,
+      "false_positive_rate": 0.0,
+      "accuracy": 50.0
+    },
+    "requirements_check": {
+      "f1_score_meets_95_percent": false,
+      "fpr_meets_20_percent": true,
+      "ready_for_production": false
+    }
+  }
+}
