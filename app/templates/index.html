@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APK Malware Scanner - Security Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #aaa;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            background: #00ff88;
+            color: #1a1a2e;
+            border-radius: 20px;
+            font-size: 0.8em;
+            margin-top: 10px;
+        }
+
+        /* Scanner Options */
+        .scanner-options {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .option-group {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .option label {
+            cursor: pointer;
+        }
+
+        .option input {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        /* Upload Area */
+        .upload-area {
+            background: rgba(255,255,255,0.05);
+            border: 2px dashed rgba(255,255,255,0.3);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+
+        .upload-area:hover {
+            border-color: #00ff88;
+            background: rgba(0,255,136,0.1);
+        }
+
+        .upload-area.drag-over {
+            border-color: #00ff88;
+            background: rgba(0,255,136,0.2);
+        }
+
+        .upload-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .file-list {
+            margin-top: 20px;
+        }
+
+        .file-item {
+            background: rgba(255,255,255,0.1);
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .remove-file {
+            background: #ff4444;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Scan Button */
+        .scan-btn {
+            background: linear-gradient(90deg, #00ff88, #00b4d8);
+            color: #1a1a2e;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s;
+            margin-bottom: 30px;
+        }
+
+        .scan-btn:hover {
+            transform: scale(1.02);
+        }
+
+        .scan-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Results */
+        .results-section {
+            display: none;
+        }
+
+        .result-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 5px solid #00ff88;
+        }
+
+        .result-card.critical { border-left-color: #ff0000; }
+        .result-card.high { border-left-color: #ff6600; }
+        .result-card.medium { border-left-color: #ffcc00; }
+        .result-card.low { border-left-color: #00ff88; }
+        .result-card.safe { border-left-color: #00ff88; }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .filename {
+            font-size: 1.2em;
+            font-weight: bold;
+            word-break: break-all;
+        }
+
+        .risk-badge {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .risk-critical { background: #ff0000; color: white; }
+        .risk-high { background: #ff6600; color: white; }
+        .risk-medium { background: #ffcc00; color: #1a1a2e; }
+        .risk-low { background: #00ff88; color: #1a1a2e; }
+        .risk-safe { background: #00aa55; color: white; }
+
+        .risk-score {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .detail-section {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .permission-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .permission-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-family: monospace;
+        }
+
+        .permission-dangerous {
+            background: #ff4444;
+            color: white;
+        }
+
+        .finding-item {
+            background: rgba(0,0,0,0.3);
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 8px;
+        }
+
+        /* Summary */
+        .summary {
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .summary-stats {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .stat {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            display: none;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top-color: #00ff88;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container { padding: 10px; }
+            .header h1 { font-size: 1.5em; }
+            .result-header { flex-direction: column; gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🛡️ APK Malware Scanner</h1>
+            <p>Advanced Android Malware Detection with Voice Phishing Analysis</p>
+            <div class="status-badge" id="statusBadge">● System Ready</div>
+        </div>
+
+        <!-- Scanner Options -->
+        <div class="scanner-options">
+            <h3>⚙️ Scanner Configuration</h3>
+            <div class="option-group">
+                <div class="option">
+                    <input type="checkbox" id="scanAndroguard" checked>
+                    <label>🔍 Androguard Scanner (Static Analysis)</label>
+                </div>
+                <div class="option">
+                    <input type="checkbox" id="scanMobsf">
+                    <label>🐳 MOBSF Scanner (Deep Analysis - Requires Docker)</label>
+                </div>
+            </div>
+            <p style="font-size: 0.8em; color: #aaa; margin-top: 10px;">
+                💡 Note: Androguard is always recommended. MOBSF requires separate installation.
+            </p>
+        </div>
+
+        <!-- Upload Area -->
+        <div class="upload-area" id="uploadArea">
+            <div class="upload-icon">📁</div>
+            <h3>Drag & Drop APK Files Here</h3>
+            <p>or click to select files</p>
+            <input type="file" id="fileInput" multiple accept=".apk" style="display: none;">
+            <div class="file-list" id="fileList"></div>
+        </div>
+
+        <!-- Scan Button -->
+        <button class="scan-btn" id="scanBtn">🚀 Start Scan</button>
+
+        <!-- Loading -->
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Scanning APK files... Please wait</p>
+        </div>
+
+        <!-- Results -->
+        <div class="results-section" id="resultsSection">
+            <h2>📊 Scan Results</h2>
+            <div id="resultsContainer"></div>
+        </div>
+    </div>
+
+    <script>
+        let selectedFiles = [];
+
+        // DOM Elements
+        const uploadArea = document.getElementById('uploadArea');
+        const fileInput = document.getElementById('fileInput');
+        const fileList = document.getElementById('fileList');
+        const scanBtn = document.getElementById('scanBtn');
+        const loading = document.getElementById('loading');
+        const resultsSection = document.getElementById('resultsSection');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const scanAndroguard = document.getElementById('scanAndroguard');
+        const scanMobsf = document.getElementById('scanMobsf');
+
+        // Upload handlers
+        uploadArea.addEventListener('click', () => fileInput.click());
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('drag-over');
+        });
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('drag-over');
+        });
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('drag-over');
+            const files = Array.from(e.dataTransfer.files);
+            addFiles(files);
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            addFiles(Array.from(e.target.files));
+        });
+
+        function addFiles(files) {
+            for (const file of files) {
+                if (file.name.endsWith('.apk') && !selectedFiles.find(f => f.name === file.name)) {
+                    selectedFiles.push(file);
+                }
+            }
+            updateFileList();
+        }
+
+        function removeFile(index) {
+            selectedFiles.splice(index, 1);
+            updateFileList();
+        }
+
+        function updateFileList() {
+            if (selectedFiles.length === 0) {
+                fileList.innerHTML = '<p style="color: #aaa;">No files selected</p>';
+                return;
+            }
+
+            fileList.innerHTML = selectedFiles.map((file, index) => `
+                <div class="file-item">
+                    <span>📱 ${file.name}</span>
+                    <button class="remove-file" onclick="removeFile(${index})">Remove</button>
+                </div>
+            `).join('');
+        }
+
+        // Scan function
+        scanBtn.addEventListener('click', async () => {
+            if (selectedFiles.length === 0) {
+                alert('Please select at least one APK file');
+                return;
+            }
+
+            // Show loading
+            loading.style.display = 'block';
+            resultsSection.style.display = 'none';
+            scanBtn.disabled = true;
+
+            // Prepare form data
+            const formData = new FormData();
+            for (const file of selectedFiles) {
+                formData.append('files', file);
+            }
+            formData.append('scan_androguard', scanAndroguard.checked);
+            formData.append('scan_mobsf', scanMobsf.checked);
+
+            try {
+                const response = await fetch('/scan/apks', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+                displayResults(data);
+
+            } catch (error) {
+                console.error('Scan error:', error);
+                alert('Scan failed: ' + error.message);
+            } finally {
+                loading.style.display = 'none';
+                scanBtn.disabled = false;
+            }
+        });
+
+        function displayResults(data) {
+            resultsContainer.innerHTML = '';
+
+            // Display each result
+            for (const result of data.results) {
+                const riskClass = result.risk_level.toLowerCase();
+                const isMalicious = result.is_malicious;
+
+                const card = document.createElement('div');
+                card.className = `result-card ${riskClass}`;
+
+                // Dangerous permissions HTML
+                const dangerousPermsHtml = result.dangerous_permissions.length > 0
+                    ? `<div><strong>⚠️ Dangerous Permissions:</strong>
+                        <div class="permission-list">
+                            ${result.dangerous_permissions.map(p => `<span class="permission-badge permission-dangerous">${p.split('.').pop()}</span>`).join('')}
+                        </div>
+                       </div>`
+                    : '';
+
+                // Voice phishing HTML
+                let voicePhishingHtml = '';
+                if (result.voice_phishing_analysis && result.voice_phishing_analysis.outgoing_hijacking_detected) {
+                    voicePhishingHtml = `
+                        <div class="detail-section">
+                            <strong>📞 Voice Phishing Detection:</strong>
+                            <div class="finding-item">
+                                ${result.voice_phishing_analysis.outgoing_hijacking_detected ? '⚠️ Outgoing call hijacking detected' : ''}
+                                ${result.voice_phishing_analysis.outgoing_hijacking_method ? `<br>Method: ${result.voice_phishing_analysis.outgoing_hijacking_method}` : ''}
+                                ${result.voice_phishing_analysis.incoming_spoofing_detected ? '<br>⚠️ Incoming call spoofing detected' : ''}
+                            </div>
+                        </div>
+                    `;
+                }
+
+                // Scanner used
+                const scannersUsed = [];
+                if (result.scanners.androguard) scannersUsed.push('Androguard');
+                if (result.scanners.mobsf) scannersUsed.push('MOBSF');
+
+                card.innerHTML = `
+                    <div class="result-header">
+                        <span class="filename">📱 ${result.filename}</span>
+                        <div>
+                            <span class="risk-badge risk-${riskClass}">${result.risk_level}</span>
+                            <span class="risk-score">${result.risk_score}</span>
+                        </div>
+                    </div>
+                    <div class="result-header">
+                        <span>🔍 Scanned with: ${scannersUsed.join(', ') || 'None'}</span>
+                        <span>⏱️ ${result.scan_duration.toFixed(2)}s</span>
+                    </div>
+                    <div class="detail-section">
+                        <strong>📋 Package:</strong> ${result.androguard_results?.package_name || 'N/A'}
+                        <br><strong>📌 Version:</strong> ${result.androguard_results?.version_name || 'N/A'}
+                    </div>
+                    ${dangerousPermsHtml}
+                    ${voicePhishingHtml}
+                    ${result.findings.length > 0 ? `
+                        <div class="detail-section">
+                            <strong>🔍 Findings:</strong>
+                            ${result.findings.slice(0, 5).map(f => `<div class="finding-item">⚠️ ${f.description}</div>`).join('')}
+                        </div>
+                    ` : ''}
+                    <div class="detail-section">
+                        <strong>✅ Verdict:</strong> ${isMalicious ? '⚠️ MALICIOUS - Take action immediately' : '✅ SAFE - No threats detected'}
+                    </div>
+                `;
+
+                resultsContainer.appendChild(card);
+            }
+
+            // Display summary
+            const summary = document.createElement('div');
+            summary.className = 'summary';
+            summary.innerHTML = `
+                <h3>📈 Summary</h3>
+                <div class="summary-stats">
+                    <div class="stat">
+                        <div class="stat-value">${data.summary.total_malicious}</div>
+                        <div>Malicious</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">${data.summary.total_clean}</div>
+                        <div>Clean</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">${data.summary.voice_phishing_detected || 0}</div>
+                        <div>Voice Phishing</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">${data.summary.average_risk_score.toFixed(1)}</div>
+                        <div>Avg Risk Score</div>
+                    </div>
+                </div>
+                <div style="margin-top: 15px;">
+                    <strong>Scanners Used:</strong> ${Object.entries(data.summary.scanners_used).filter(([k,v]) => v).map(([k]) => k).join(', ')}
+                </div>
+            `;
+            resultsContainer.appendChild(summary);
+
+            resultsSection.style.display = 'block';
+
+            // Scroll to results
+            resultsSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Health check
+        async function checkHealth() {
+            try {
+                const response = await fetch('/health');
+                const data = await response.json();
+                const badge = document.getElementById('statusBadge');
+                if (data.status === 'healthy') {
+                    badge.innerHTML = '✅ System Ready';
+                    badge.style.background = '#00ff88';
+                    badge.style.color = '#1a1a2e';
+                }
+            } catch (e) {
+                console.error('Health check failed:', e);
+            }
+        }
+
+        checkHealth();
+        setInterval(checkHealth, 30000);
+    </script>
+</body>
+</html>

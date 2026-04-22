@@ -7,12 +7,33 @@ from typing import Dict, Any, List
 
 logger = logging.getLogger(__name__)
 
+# ============================================================
 # IMPORTANT: Patch SDK trước khi import androguard
-import app.sdk_patch
+# ============================================================
 
-app.sdk_patch.setup_android_sdk()
+# Set Android SDK path
+REAL_SDK_PATH = r"C:\Users\ACER\AppData\Local\Android\Sdk"
+os.environ['ANDROID_HOME'] = REAL_SDK_PATH
+os.environ['ANDROID_SDK_ROOT'] = REAL_SDK_PATH
 
+# Tạo file public.xml nếu chưa có
+platforms_dir = os.path.join(REAL_SDK_PATH, 'platforms')
+if os.path.exists(platforms_dir):
+    for platform in os.listdir(platforms_dir):
+        if platform.startswith('android-'):
+            values_dir = os.path.join(platforms_dir, platform, 'data', 'res', 'values')
+            os.makedirs(values_dir, exist_ok=True)
+            public_xml = os.path.join(values_dir, 'public.xml')
+            if not os.path.exists(public_xml):
+                with open(public_xml, 'w') as f:
+                    f.write('<?xml version="1.0" encoding="utf-8"?>\n')
+                    f.write('<resources>\n')
+                    f.write('    <public type="attr" name="color" id="0x01010000" />\n')
+                    f.write('</resources>\n')
+
+# ============================================================
 # Now safe to import androguard
+# ============================================================
 from androguard.core.bytecodes import apk, dvm
 from androguard.core.analysis import analysis
 

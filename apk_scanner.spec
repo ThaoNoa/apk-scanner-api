@@ -1,68 +1,73 @@
+# apk_scanner.spec
 # -*- mode: python ; coding: utf-8 -*-
 
-import sys
 import os
-from PyInstaller.utils.hooks import collect_data_files, collect_submodules
+import sys
 
-block_cipher = None
+# Đường dẫn đến site-packages
+site_packages = r"C:\Users\ACER\PycharmProjects\apk-scanner-api\.venv\Lib\site-packages"
 
-# Collect all necessary data files
+# Hàm thu thập tất cả files trong thư mục
+def collect_files(src_dir, dest_dir):
+    datas = []
+    if os.path.exists(src_dir):
+        for root, dirs, files in os.walk(src_dir):
+            for file in files:
+                full_path = os.path.join(root, file)
+                rel_path = os.path.relpath(full_path, site_packages)
+                datas.append((full_path, rel_path))
+    return datas
+
+# Thu thập tất cả các thư mục cần thiết của androguard
+androguard_datas = []
+androguard_datas.extend(collect_files(
+    os.path.join(site_packages, 'androguard', 'core', 'api_specific_resources'),
+    'androguard\\core\\api_specific_resources'
+))
+androguard_datas.extend(collect_files(
+    os.path.join(site_packages, 'androguard', 'core', 'resources'),
+    'androguard\\core\\resources'
+))
+
+# Thêm templates và config
+datas = [
+    ('app\\templates', 'app\\templates'),
+    ('config.json', '.'),
+] + androguard_datas
+
 a = Analysis(
     ['windows_service.py'],
     pathex=[],
     binaries=[],
-    datas=[
-        ('app', 'app'),
-        ('requirements.txt', '.'),
-    ],
+    datas=datas,
     hiddenimports=[
         'app.main',
         'app.models.scan_models',
         'app.scanners.androguard_scanner',
-        'app.scanners.mobsf_scanner',
         'app.scanners.combined_scanner',
         'app.scanners.voice_phishing_scanner',
         'app.utils.file_handler',
-        'app.utils.metrics_calculator',
-        'app.utils.ground_truth',
         'uvicorn',
-        'uvicorn.lifespan.on',
-        'uvicorn.lifespan.off',
-        'uvicorn.protocols.http',
-        'uvicorn.protocols.http.auto',
-        'uvicorn.protocols.http.h11_impl',
-        'uvicorn.protocols.http.httptools_impl',
-        'uvicorn.protocols.websockets',
-        'uvicorn.protocols.websockets.auto',
-        'uvicorn.protocols.websockets.wsproto_impl',
-        'uvicorn.protocols.websockets.websockets_impl',
+        'jinja2',
         'androguard',
         'androguard.core',
         'androguard.core.bytecodes',
         'androguard.core.analysis',
-        'yara',
-        'fastapi',
-        'pydantic',
-        'aiofiles',
-        'requests',
+        'androguard.core.api_specific_resources',
     ],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
     excludes=[],
-    win_no_prefer_redirects=False,
-    win_private_assemblies=False,
-    cipher=block_cipher,
     noarchive=False,
 )
 
-pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
+pyz = PYZ(a.pure)
 
 exe = EXE(
     pyz,
     a.scripts,
     a.binaries,
-    a.zipfiles,
     a.datas,
     [],
     name='APKMalwareScanner',
@@ -70,13 +75,10 @@ exe = EXE(
     bootloader_ignore_signals=False,
     strip=False,
     upx=True,
-    upx_exclude=[],
-    runtime_tmpdir=None,
     console=True,
     disable_windowed_traceback=False,
     argv_emulation=False,
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
-    icon='app_icon.ico'
 )

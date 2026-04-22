@@ -1,0 +1,118 @@
+
+
+1. HOW TO ANALYZE ONE APK FILE AT A TIME
+================================================================================
+
+Use POST /scan/apks endpoint
+
+Example with curl:
+   curl -X POST "http://localhost:8080/scan/apks" -F "files=@your_app.apk"
+
+Example with Postman:
+   Method: POST
+   URL: http://localhost:8080/scan/apks
+   Body -> form-data -> Key: files (Type: File) -> Select your APK
+
+================================================================================
+2. SCANNER OPTIONS
+================================================================================
+
+Option 1: scan_androguard = true (RECOMMENDED)
+   - Uses Androguard for static analysis
+   - Analyzes permissions, components, certificates
+   - Fast (50ms per file)
+   - Always available
+
+Option 2: scan_mobsf = true (OPTIONAL - requires MOBSF server)
+   - Uses MOBSF for deep analysis
+   - More detailed but slower
+   - Requires MOBSF server running
+
+RECOMMENDATION:
+   Set scan_androguard = true, scan_mobsf = false
+   Androguard is sufficient for malware detection!
+
+================================================================================
+3. UNDERSTANDING is_malicious FIELD
+================================================================================
+
+is_malicious = true  →  FILE IS MALICIOUS! Take action immediately:
+                         - Block installation
+                         - Quarantine the file
+                         - Alert security team
+
+is_malicious = false →  FILE IS SAFE (with confidence > 80%)
+                         - No action needed
+
+================================================================================
+4. COMPLETE JSON RESPONSE FIELDS
+================================================================================
+
+All fields below ALWAYS appear in results (no dynamic disappearing):
+
+TOP-LEVEL FIELDS:
+   - batch_id: Unique identifier for this scan
+   - total_files: Number of files scanned
+   - total_duration: Total scan time (seconds)
+   - results: Array of individual results
+   - summary: Aggregated statistics
+
+SCAN RESULT FIELDS (per file):
+   - filename: Name of the APK file
+   - is_malicious: TRUE if malware detected
+   - risk_level: SAFE / LOW / MEDIUM / HIGH / CRITICAL
+   - risk_score: 0-100 (higher = more dangerous)
+   - confidence: 0-100% (reliability of detection)
+   - permissions: All permissions requested
+   - dangerous_permissions: High-risk permissions only
+   - activities: App screens/components
+   - services: Background services
+   - receivers: Broadcast receivers
+   - findings: Detailed detection findings
+   - detection_methods: How malware was detected
+   - voice_phishing_analysis: Call hijacking detection
+
+SUMMARY FIELDS:
+   - total_malicious: Count of malicious files
+   - total_clean: Count of clean files
+   - by_risk_level: Breakdown by risk level
+   - voice_phishing_detected: Count of voice phishing apps
+   - average_risk_score: Average score across all files
+   - scanners_used: Which scanners were active
+
+================================================================================
+5. EXAMPLE RESPONSE (ALL FIELDS PRESENT)
+================================================================================
+
+{
+  "batch_id": "abc123",
+  "total_files": 1,
+  "total_duration": 0.156,
+  "results": [{
+    "filename": "malicious.apk",
+    "is_malicious": true,
+    "risk_level": "HIGH",
+    "risk_score": 72,
+    "confidence": 85,
+    "permissions": ["android.permission.CAMERA"],
+    "dangerous_permissions": ["android.permission.CAMERA"],
+    "activities": ["MainActivity"],
+    "services": ["BackgroundService"],
+    "receivers": ["BootReceiver"],
+    "findings": [{"type": "dangerous_permission", "severity": "high"}],
+    "detection_methods": ["High-risk permission: CAMERA"],
+    "voice_phishing_analysis": {
+      "outgoing_hijacking_detected": true
+    }
+  }],
+  "summary": {
+    "total_malicious": 1,
+    "total_clean": 0,
+    "by_risk_level": {"HIGH": 1},
+    "average_risk_score": 72
+  }
+}
+
+================================================================================
+For questions: dhtung@npcore.com
+================================================================================

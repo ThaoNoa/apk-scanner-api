@@ -1,0 +1,16 @@
+2026-04-15 22:01:22,638 - __main__ - INFO - Starting APK Malware Scanner...
+2026-04-15 22:02:29,304 - app.main - INFO - Scanning with scanners: ['Androguard']
+2026-04-15 22:02:29,334 - app.utils.file_handler - INFO - File saved: uploads\6e3fa492be8d41f0be74810406c2de86.apk
+2026-04-15 22:02:29,356 - app.utils.file_handler - INFO - File saved: uploads\c1e5d5a00cb24cfabb68d3a941ccc4c6.apk
+2026-04-15 22:02:29,360 - app.scanners.combined_scanner - INFO - Queueing scan for uploads\6e3fa492be8d41f0be74810406c2de86.apk
+2026-04-15 22:02:29,361 - app.scanners.combined_scanner - INFO - Queueing scan for uploads\c1e5d5a00cb24cfabb68d3a941ccc4c6.apk
+2026-04-15 22:02:29,375 - app.scanners.combined_scanner - INFO - Starting Androguard scan for 6e3fa492be8d41f0be74810406c2de86.apk
+2026-04-15 22:02:29,386 - androguard.apk - INFO - Starting analysis on AndroidManifest.xml
+2026-04-15 22:02:29,412 - androguard.apk - INFO - APK file was successfully validated!
+2026-04-15 22:02:29,413 - app.scanners.androguard_scanner - ERROR - Error in Androguard scan: [WinError 3] The system cannot find the path specified: 'C:\\Users\\ACER\\AppData\\Local\\Temp\\_MEI138322\\androguard\\core\\api_specific_resources\\aosp_permissions'
+2026-04-15 22:02:29,418 - app.scanners.combined_scanner - INFO - Starting Androguard scan for c1e5d5a00cb24cfabb68d3a941ccc4c6.apk
+2026-04-15 22:02:29,426 - androguard.apk - INFO - Starting analysis on AndroidManifest.xml
+2026-04-15 22:02:29,435 - androguard.apk - INFO - APK file was successfully validated!
+2026-04-15 22:02:29,437 - app.scanners.androguard_scanner - ERROR - Error in Androguard scan: [WinError 3] The system cannot find the path specified: 'C:\\Users\\ACER\\AppData\\Local\\Temp\\_MEI138322\\androguard\\core\\api_specific_resources\\aosp_permissions'
+2026-04-15 22:02:29,446 - app.utils.file_handler - INFO - Cleaned up: uploads\6e3fa492be8d41f0be74810406c2de86.apk
+2026-04-15 22:02:29,449 - app.utils.file_handler - INFO - Cleaned up: uploads\c1e5d5a00cb24cfabb68d3a941ccc4c6.apk

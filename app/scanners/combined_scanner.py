@@ -5,6 +5,7 @@ import time
 import logging
 from pathlib import Path
 import asyncio
+import os
 
 from .androguard_scanner import AndroguardScanner
 from .mobsf_scanner import MOBSFScanner
@@ -15,7 +16,10 @@ logger = logging.getLogger(__name__)
 class CombinedScanner:
     def __init__(self, use_mobsf: bool = True):
         self.androguard_scanner = AndroguardScanner()
-        self.mobsf_scanner = MOBSFScanner() if use_mobsf else None
+        self.mobsf_scanner = MOBSFScanner(
+            mobsf_url=os.getenv("MOBSF_URL", "http://localhost:8000"),
+            api_key=os.getenv("MOBSF_API_KEY")
+        ) if use_mobsf else None
 
     def calculate_risk_score(self, results: Dict[str, Any]) -> Dict[str, Any]:
         """

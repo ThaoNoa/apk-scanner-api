@@ -1,0 +1,152 @@
+2026-04-23 00:17:20,986 - __main__ - INFO - Starting APK Malware Scanner...
+2026-04-23 00:19:49,903 - app.main - INFO - Scanning with scanners: ['Androguard']
+2026-04-23 00:19:49,942 - app.utils.file_handler - INFO - File saved: uploads\4f00854cf64e4b9cbc14914ac4bfd248.apk
+2026-04-23 00:19:49,947 - app.scanners.combined_scanner - INFO - Queueing scan for uploads\4f00854cf64e4b9cbc14914ac4bfd248.apk
+2026-04-23 00:19:49,983 - app.scanners.combined_scanner - INFO - Starting Androguard scan for 4f00854cf64e4b9cbc14914ac4bfd248.apk
+2026-04-23 00:19:49,998 - androguard.apk - INFO - Starting analysis on AndroidManifest.xml
+2026-04-23 00:19:50,031 - androguard.apk - INFO - APK file was successfully validated!
+2026-04-23 00:19:50,034 - androguard.core.api_specific_resources - WARNING - Requested API level 36 is larger than maximum we have, returning API level 28 instead.
+2026-04-23 00:19:50,054 - app.scanners.androguard_scanner - WARNING - Error extracting certificate 0: 'Certificate' object has no attribute 'signature_algorithm'
+2026-04-23 00:19:50,055 - app.scanners.androguard_scanner - WARNING - Error parsing dex: 'generator' object is not subscriptable
+2026-04-23 00:19:50,065 - app.utils.file_handler - INFO - Cleaned up: uploads\4f00854cf64e4b9cbc14914ac4bfd248.apk
+2026-04-23 00:20:10,657 - app.main - INFO - Scanning with scanners: ['MOBSF']
+2026-04-23 00:20:10,681 - app.utils.file_handler - INFO - File saved: uploads\2bfa03a968614495b5e2a5d8883c6fe2.apk
+2026-04-23 00:20:10,684 - app.scanners.combined_scanner - INFO - Queueing scan for uploads\2bfa03a968614495b5e2a5d8883c6fe2.apk
+2026-04-23 00:20:10,710 - app.utils.file_handler - INFO - Cleaned up: uploads\2bfa03a968614495b5e2a5d8883c6fe2.apk
+2026-04-23 00:32:28,333 - __main__ - INFO - Starting APK Malware Scanner...
+2026-04-23 00:33:29,574 - app.main - INFO - Scanning with scanners: ['Androguard']
+2026-04-23 00:33:29,593 - app.utils.file_handler - INFO - File saved: uploads\030ec9c36008405380ecf0c22c79467a.apk
+2026-04-23 00:33:29,604 - app.utils.file_handler - INFO - File saved: uploads\09687ef65b844fb1894d1e64c1090593.apk
+2026-04-23 00:33:29,617 - app.utils.file_handler - INFO - File saved: uploads\6d1573e1d0594f41bef89db17afaf808.apk
+2026-04-23 00:33:29,628 - app.utils.file_handler - INFO - File saved: uploads\215a39d5ea444256af97c5b566536348.apk
+2026-04-23 00:33:29,638 - app.utils.file_handler - INFO - File saved: uploads\6f6326d813024cc3b115bd061421d564.apk
+2026-04-23 00:33:29,656 - app.utils.file_handler - INFO - File saved: uploads\bc3d9424add347a297064d68c507bb0f.apk
+2026-04-23 00:33:29,665 - app.scanners.combined_scanner - INFO - Queueing scan for uploads\030ec9c36008405380ecf0c22c79467a.apk
+2026-04-23 00:33:29,667 - app.scanners.combined_scanner - INFO - Queueing scan for uploads\09687ef65b844fb1894d1e64c1090593.apk
+2026-04-23 00:33:29,671 - app.scanners.combined_scanner - INFO - Queueing scan for uploads\6d1573e1d0594f41bef89db17afaf808.apk
+2026-04-23 00:33:29,672 - app.scanners.combined_scanner - INFO - Queueing scan for uploads\215a39d5ea444256af97c5b566536348.apk
+2026-04-23 00:33:29,673 - app.scanners.combined_scanner - INFO - Queueing scan for uploads\6f6326d813024cc3b115bd061421d564.apk
+2026-04-23 00:33:29,673 - app.scanners.combined_scanner - INFO - Queueing scan for uploads\bc3d9424add347a297064d68c507bb0f.apk
+2026-04-23 00:33:29,675 - app.scanners.combined_scanner - INFO - Starting Androguard scan for 030ec9c36008405380ecf0c22c79467a.apk
+2026-04-23 00:33:29,677 - androguard.apk - INFO - Starting analysis on AndroidManifest.xml
+2026-04-23 00:33:29,678 - androguard.axml - WARNING - Header size is 28024! Are you trying to parse a plain XML file?
+2026-04-23 00:33:29,679 - androguard.axml - ERROR - This does not look like an AXML file. header size does not equal 8! header size = 28024
+2026-04-23 00:33:29,679 - androguard.apk - ERROR - Error while parsing AndroidManifest.xml - is the file valid?
+2026-04-23 00:33:29,679 - app.scanners.androguard_scanner - ERROR - Error in Androguard scan: 'Name'
+2026-04-23 00:33:29,680 - app.scanners.combined_scanner - INFO - Starting Androguard scan for 09687ef65b844fb1894d1e64c1090593.apk
+2026-04-23 00:33:29,681 - androguard.apk - INFO - Starting analysis on AndroidManifest.xml
+2026-04-23 00:33:29,682 - androguard.axml - WARNING - Header size is 28024! Are you trying to parse a plain XML file?
+2026-04-23 00:33:29,682 - androguard.axml - ERROR - This does not look like an AXML file. header size does not equal 8! header size = 28024
+2026-04-23 00:33:29,682 - androguard.apk - ERROR - Error while parsing AndroidManifest.xml - is the file valid?
+2026-04-23 00:33:29,683 - app.scanners.androguard_scanner - ERROR - Error in Androguard scan: 'Name'
+2026-04-23 00:33:29,685 - app.scanners.combined_scanner - INFO - Starting Androguard scan for 6d1573e1d0594f41bef89db17afaf808.apk
+2026-04-23 00:33:29,689 - androguard.apk - INFO - Starting analysis on AndroidManifest.xml
+2026-04-23 00:33:29,690 - androguard.axml - WARNING - Header size is 28024! Are you trying to parse a plain XML file?
+2026-04-23 00:33:29,690 - androguard.axml - ERROR - This does not look like an AXML file. header size does not equal 8! header size = 28024
+2026-04-23 00:33:29,691 - androguard.apk - ERROR - Error while parsing AndroidManifest.xml - is the file valid?
+2026-04-23 00:33:29,691 - app.scanners.androguard_scanner - ERROR - Error in Androguard scan: 'Name'
+2026-04-23 00:33:29,692 - app.scanners.combined_scanner - INFO - Starting Androguard scan for 215a39d5ea444256af97c5b566536348.apk
+2026-04-23 00:33:29,693 - androguard.apk - INFO - Starting analysis on AndroidManifest.xml
+2026-04-23 00:33:29,694 - androguard.axml - WARNING - Header size is 28024! Are you trying to parse a plain XML file?
+2026-04-23 00:33:29,695 - androguard.axml - ERROR - This does not look like an AXML file. header size does not equal 8! header size = 28024
+2026-04-23 00:33:29,695 - androguard.apk - ERROR - Error while parsing AndroidManifest.xml - is the file valid?
+2026-04-23 00:33:29,695 - app.scanners.androguard_scanner - ERROR - Error in Androguard scan: 'Name'
+2026-04-23 00:33:29,696 - app.scanners.combined_scanner - INFO - Starting Androguard scan for 6f6326d813024cc3b115bd061421d564.apk
+2026-04-23 00:33:29,697 - androguard.apk - INFO - Starting analysis on AndroidManifest.xml
+2026-04-23 00:33:29,697 - androguard.axml - WARNING - Header size is 28024! Are you trying to parse a plain XML file?
+2026-04-23 00:33:29,698 - androguard.axml - ERROR - This does not look like an AXML file. header size does not equal 8! header size = 28024
+2026-04-23 00:33:29,698 - androguard.apk - ERROR - Error while parsing AndroidManifest.xml - is the file valid?
+2026-04-23 00:33:29,698 - app.scanners.androguard_scanner - ERROR - Error in Androguard scan: 'Name'
+2026-04-23 00:33:29,699 - app.scanners.combined_scanner - INFO - Starting Androguard scan for bc3d9424add347a297064d68c507bb0f.apk
+2026-04-23 00:33:29,701 - androguard.apk - INFO - Starting analysis on AndroidManifest.xml
+2026-04-23 00:33:29,701 - androguard.axml - WARNING - Header size is 28024! Are you trying to parse a plain XML file?
+2026-04-23 00:33:29,703 - androguard.axml - ERROR - This does not look like an AXML file. header size does not equal 8! header size = 28024
+2026-04-23 00:33:29,703 - androguard.apk - ERROR - Error while parsing AndroidManifest.xml - is the file valid?
+2026-04-23 00:33:29,703 - app.scanners.androguard_scanner - ERROR - Error in Androguard scan: 'Name'
+2026-04-23 00:33:29,708 - app.utils.file_handler - INFO - Cleaned up: uploads\030ec9c36008405380ecf0c22c79467a.apk
+2026-04-23 00:33:29,709 - app.utils.file_handler - INFO - Cleaned up: uploads\09687ef65b844fb1894d1e64c1090593.apk
+2026-04-23 00:33:29,710 - app.utils.file_handler - INFO - Cleaned up: uploads\6d1573e1d0594f41bef89db17afaf808.apk
+2026-04-23 00:33:29,713 - app.utils.file_handler - INFO - Cleaned up: uploads\215a39d5ea444256af97c5b566536348.apk
+2026-04-23 00:33:29,715 - app.utils.file_handler - INFO - Cleaned up: uploads\6f6326d813024cc3b115bd061421d564.apk
+2026-04-23 00:33:29,719 - app.utils.file_handler - INFO - Cleaned up: uploads\bc3d9424add347a297064d68c507bb0f.apk
+2026-04-23 00:39:54,161 - __main__ - INFO - Starting APK Malware Scanner...
+2026-04-23 00:46:43,955 - __main__ - INFO - Starting APK Malware Scanner...
+2026-04-23 00:47:04,218 - app.main - INFO - Scanning with scanners: ['Androguard']
+2026-04-23 00:47:04,225 - app.utils.file_handler - INFO - File saved: uploads\ed156eaf1b84478f99c041c398e96b6f.apk
+2026-04-23 00:47:04,232 - app.utils.file_handler - INFO - File saved: uploads\e31577c5fbc64c2b8fddaafd3773d3d6.apk
+2026-04-23 00:47:04,233 - app.scanners.combined_scanner - INFO - Queueing scan for uploads\ed156eaf1b84478f99c041c398e96b6f.apk
+2026-04-23 00:47:04,233 - app.scanners.combined_scanner - INFO - Queueing scan for uploads\e31577c5fbc64c2b8fddaafd3773d3d6.apk
+2026-04-23 00:47:04,251 - app.scanners.combined_scanner - INFO - Starting Androguard scan for ed156eaf1b84478f99c041c398e96b6f.apk
+2026-04-23 00:47:04,253 - androguard.apk - INFO - Starting analysis on AndroidManifest.xml
+2026-04-23 00:47:04,254 - androguard.axml - WARNING - Header size is 28024! Are you trying to parse a plain XML file?
+2026-04-23 00:47:04,255 - androguard.axml - ERROR - This does not look like an AXML file. header size does not equal 8! header size = 28024
+2026-04-23 00:47:04,256 - androguard.apk - ERROR - Error while parsing AndroidManifest.xml - is the file valid?
+2026-04-23 00:47:04,256 - app.scanners.androguard_scanner - ERROR - Error in Androguard scan: 'Name'
+2026-04-23 00:47:04,257 - app.scanners.combined_scanner - INFO - Starting Androguard scan for e31577c5fbc64c2b8fddaafd3773d3d6.apk
+2026-04-23 00:47:04,259 - androguard.apk - INFO - Starting analysis on AndroidManifest.xml
+2026-04-23 00:47:04,260 - androguard.axml - WARNING - Header size is 28024! Are you trying to parse a plain XML file?
+2026-04-23 00:47:04,261 - androguard.axml - ERROR - This does not look like an AXML file. header size does not equal 8! header size = 28024
+2026-04-23 00:47:04,262 - androguard.apk - ERROR - Error while parsing AndroidManifest.xml - is the file valid?
+2026-04-23 00:47:04,263 - app.scanners.androguard_scanner - ERROR - Error in Androguard scan: 'Name'
+2026-04-23 00:47:04,269 - app.utils.file_handler - INFO - Cleaned up: uploads\ed156eaf1b84478f99c041c398e96b6f.apk
+2026-04-23 00:47:04,271 - app.utils.file_handler - INFO - Cleaned up: uploads\e31577c5fbc64c2b8fddaafd3773d3d6.apk
+2026-04-23 00:48:11,165 - __main__ - INFO - Starting APK Malware Scanner...
+2026-04-23 00:48:27,973 - app.main - INFO - Scanning with scanners: ['Androguard']
+2026-04-23 00:48:27,980 - app.utils.file_handler - INFO - File saved: uploads\b833175575d2436cafabf4462a29a498.apk
+2026-04-23 00:48:27,986 - app.utils.file_handler - INFO - File saved: uploads\5e3bd33078274e6996c7d7e01da22f10.apk
+2026-04-23 00:48:27,987 - app.scanners.combined_scanner - INFO - Queueing scan for uploads\b833175575d2436cafabf4462a29a498.apk
+2026-04-23 00:48:27,988 - app.scanners.combined_scanner - INFO - Queueing scan for uploads\5e3bd33078274e6996c7d7e01da22f10.apk
+2026-04-23 00:48:28,016 - app.scanners.combined_scanner - INFO - Starting Androguard scan for b833175575d2436cafabf4462a29a498.apk
+2026-04-23 00:48:28,019 - androguard.apk - INFO - Starting analysis on AndroidManifest.xml
+2026-04-23 00:48:28,020 - androguard.axml - WARNING - Header size is 28024! Are you trying to parse a plain XML file?
+2026-04-23 00:48:28,021 - androguard.axml - ERROR - This does not look like an AXML file. header size does not equal 8! header size = 28024
+2026-04-23 00:48:28,022 - androguard.apk - ERROR - Error while parsing AndroidManifest.xml - is the file valid?
+2026-04-23 00:48:28,023 - app.scanners.androguard_scanner - ERROR - Error in Androguard scan: 'Name'
+2026-04-23 00:48:28,025 - app.scanners.combined_scanner - INFO - Starting Androguard scan for 5e3bd33078274e6996c7d7e01da22f10.apk
+2026-04-23 00:48:28,030 - androguard.apk - INFO - Starting analysis on AndroidManifest.xml
+2026-04-23 00:48:28,033 - androguard.axml - WARNING - Header size is 28024! Are you trying to parse a plain XML file?
+2026-04-23 00:48:28,035 - androguard.axml - ERROR - This does not look like an AXML file. header size does not equal 8! header size = 28024
+2026-04-23 00:48:28,036 - androguard.apk - ERROR - Error while parsing AndroidManifest.xml - is the file valid?
+2026-04-23 00:48:28,037 - app.scanners.androguard_scanner - ERROR - Error in Androguard scan: 'Name'
+2026-04-23 00:48:28,042 - app.utils.file_handler - INFO - Cleaned up: uploads\b833175575d2436cafabf4462a29a498.apk
+2026-04-23 00:48:28,045 - app.utils.file_handler - INFO - Cleaned up: uploads\5e3bd33078274e6996c7d7e01da22f10.apk
+2026-04-23 00:50:00,649 - app.main - INFO - Scanning with scanners: ['Androguard']
+2026-04-23 00:50:00,652 - app.utils.file_handler - INFO - File saved: uploads\c9f6a6dd9d754b4e8900144a5af2730d.apk
+2026-04-23 00:50:00,655 - app.utils.file_handler - INFO - File saved: uploads\4bd414a9f559483999aafd6d6f9c39da.apk
+2026-04-23 00:50:00,655 - app.scanners.combined_scanner - INFO - Queueing scan for uploads\c9f6a6dd9d754b4e8900144a5af2730d.apk
+2026-04-23 00:50:00,656 - app.scanners.combined_scanner - INFO - Queueing scan for uploads\4bd414a9f559483999aafd6d6f9c39da.apk
+2026-04-23 00:50:00,675 - app.scanners.combined_scanner - INFO - Starting Androguard scan for c9f6a6dd9d754b4e8900144a5af2730d.apk
+2026-04-23 00:50:00,677 - androguard.apk - INFO - Starting analysis on AndroidManifest.xml
+2026-04-23 00:50:00,678 - androguard.axml - WARNING - Header size is 28024! Are you trying to parse a plain XML file?
+2026-04-23 00:50:00,678 - androguard.axml - ERROR - This does not look like an AXML file. header size does not equal 8! header size = 28024
+2026-04-23 00:50:00,678 - androguard.apk - ERROR - Error while parsing AndroidManifest.xml - is the file valid?
+2026-04-23 00:50:00,679 - app.scanners.androguard_scanner - ERROR - Error in Androguard scan: 'Name'
+2026-04-23 00:50:00,680 - app.scanners.combined_scanner - INFO - Starting Androguard scan for 4bd414a9f559483999aafd6d6f9c39da.apk
+2026-04-23 00:50:00,681 - androguard.apk - INFO - Starting analysis on AndroidManifest.xml
+2026-04-23 00:50:00,682 - androguard.axml - WARNING - Header size is 28024! Are you trying to parse a plain XML file?
+2026-04-23 00:50:00,683 - androguard.axml - ERROR - This does not look like an AXML file. header size does not equal 8! header size = 28024
+2026-04-23 00:50:00,683 - androguard.apk - ERROR - Error while parsing AndroidManifest.xml - is the file valid?
+2026-04-23 00:50:00,684 - app.scanners.androguard_scanner - ERROR - Error in Androguard scan: 'Name'
+2026-04-23 00:50:00,688 - app.utils.file_handler - INFO - Cleaned up: uploads\c9f6a6dd9d754b4e8900144a5af2730d.apk
+2026-04-23 00:50:00,690 - app.utils.file_handler - INFO - Cleaned up: uploads\4bd414a9f559483999aafd6d6f9c39da.apk
+2026-04-23 00:55:18,413 - __main__ - INFO - Starting APK Malware Scanner...
+2026-04-23 00:56:08,397 - __main__ - INFO - Starting APK Malware Scanner...
+2026-04-23 00:56:47,143 - app.main - INFO - Scanning with scanners: ['Androguard']
+2026-04-23 00:56:47,148 - app.utils.file_handler - INFO - File saved: uploads\1a9edcefe9784039b3d6a43d915f6a99.apk
+2026-04-23 00:56:47,152 - app.utils.file_handler - INFO - File saved: uploads\e25e8a7790404648b63bd7e23e745b96.apk
+2026-04-23 00:56:47,152 - app.scanners.combined_scanner - INFO - Queueing scan for uploads\1a9edcefe9784039b3d6a43d915f6a99.apk
+2026-04-23 00:56:47,153 - app.scanners.combined_scanner - INFO - Queueing scan for uploads\e25e8a7790404648b63bd7e23e745b96.apk
+2026-04-23 00:56:47,166 - app.scanners.combined_scanner - INFO - Starting Androguard scan for 1a9edcefe9784039b3d6a43d915f6a99.apk
+2026-04-23 00:56:47,168 - androguard.apk - INFO - Starting analysis on AndroidManifest.xml
+2026-04-23 00:56:47,169 - androguard.axml - WARNING - Header size is 28024! Are you trying to parse a plain XML file?
+2026-04-23 00:56:47,169 - androguard.axml - ERROR - This does not look like an AXML file. header size does not equal 8! header size = 28024
+2026-04-23 00:56:47,170 - androguard.apk - ERROR - Error while parsing AndroidManifest.xml - is the file valid?
+2026-04-23 00:56:47,171 - app.scanners.androguard_scanner - ERROR - Error in Androguard scan: 'Name'
+2026-04-23 00:56:47,175 - app.scanners.combined_scanner - INFO - Starting Androguard scan for e25e8a7790404648b63bd7e23e745b96.apk
+2026-04-23 00:56:47,176 - androguard.apk - INFO - Starting analysis on AndroidManifest.xml
+2026-04-23 00:56:47,177 - androguard.axml - WARNING - Header size is 28024! Are you trying to parse a plain XML file?
+2026-04-23 00:56:47,177 - androguard.axml - ERROR - This does not look like an AXML file. header size does not equal 8! header size = 28024
+2026-04-23 00:56:47,178 - androguard.apk - ERROR - Error while parsing AndroidManifest.xml - is the file valid?
+2026-04-23 00:56:47,178 - app.scanners.androguard_scanner - ERROR - Error in Androguard scan: 'Name'
+2026-04-23 00:56:47,182 - app.utils.file_handler - INFO - Cleaned up: uploads\1a9edcefe9784039b3d6a43d915f6a99.apk
+2026-04-23 00:56:47,183 - app.utils.file_handler - INFO - Cleaned up: uploads\e25e8a7790404648b63bd7e23e745b96.apk
